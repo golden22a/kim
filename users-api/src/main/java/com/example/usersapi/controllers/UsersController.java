@@ -17,32 +17,32 @@ public class UsersController {
   @Autowired
   private com.example.usersapi.repositories.UserRepository userRepository;
 
-  @GetMapping("/users")
+  @GetMapping("/")
   public Iterable<User> findAllUsers() {
     return userRepository.findAll();
   }
 
   //Same name as long as add @PathVariable
-  @GetMapping("/users/{userId}")
+  @GetMapping("/{userId}")
   public User findUserById(@PathVariable Long userId) {
     return userRepository.findOne(userId);
   }
 
   //Delete a user by ID
-  @DeleteMapping("/users/{userId}")
+  @DeleteMapping("/{userId}")
   public HttpStatus deleteUserById(@PathVariable Long userId) {
     userRepository.delete(userId);
     return HttpStatus.OK;
   }
 
   //Posting
-  @PostMapping("/users")
+  @PostMapping("/")
   public User createNewUser(@RequestBody User newUser) {
     return userRepository.save(newUser);
   }
 
   //Naive update
-  @PatchMapping("/users/{userId}")
+  @PatchMapping("/{userId}")
   public User updateUserById(@PathVariable Long userId, @RequestBody User userRequest) {
 
     User userFromDb = userRepository.findOne(userId);

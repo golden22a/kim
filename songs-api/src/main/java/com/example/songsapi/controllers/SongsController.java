@@ -15,32 +15,32 @@ public class SongsController {
   @Autowired
   private com.example.songsapi.repositories.songRepository songRepository;
 
-  @GetMapping("/songs")
+  @GetMapping("/")
   public Iterable<Song> findAllSongs() {
     return songRepository.findAll();
   }
 
   //Same name as long as add @PathVariable
-  @GetMapping("/songs/{songId}")
+  @GetMapping("/{songId}")
   public Song findSongById(@PathVariable Long songId) {
     return songRepository.findOne(songId);
   }
 
   //Delete a song by ID
-  @DeleteMapping("/songs/{songId}")
+  @DeleteMapping("/{songId}")
   public HttpStatus deleteSongById(@PathVariable Long songId) {
     songRepository.delete(songId);
     return HttpStatus.OK;
   }
 
   //Posting
-  @PostMapping("/songs")
+  @PostMapping("/")
   public Song createNewSomg(@RequestBody Song newSong) {
     return songRepository.save(newSong);
   }
 
   //Naive update
-  @PatchMapping("/songs/{songId}")
+  @PatchMapping("/{songId}")
   public Song updateSongById(@PathVariable Long songId, @RequestBody Song songRequest) {
 
     Song songFromDb = songRepository.findOne(songId);
